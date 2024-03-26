@@ -196,12 +196,12 @@ tsc --init
 
 - `tsx`를 사용하면 설정 하지 않아도 됨
 
-#### skibLibCheck 옵션
+#### skipLibCheck 옵션
 
 ```json
 {
   "compilerOptions": {
-    "skibLibCheck": true
+    "skipLibCheck": true
   }
 }
 ```
@@ -218,7 +218,7 @@ tsc --init
     "outDir": "dist",
     "strict": true,
     "moduleDetection": "force",
-    "skibLibCheck": true
+    "skipLibCheck": true
   },
   "include": ["src"]
 }
