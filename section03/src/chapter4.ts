@@ -10,6 +10,7 @@ let arr: (number | string | boolean)[] = [1, "hello", true];
 type Dog = {
   name: string;
   color: string;
+  cute: boolean;
 };
 
 type Person = {
@@ -24,6 +25,7 @@ let union1: Union1 = {
   // ✅
   name: "",
   color: "",
+  cute: true,
 };
 
 let union2: Union1 = {
@@ -37,6 +39,14 @@ let union3: Union1 = {
   name: "",
   color: "",
   language: "",
+};
+
+let union3_2: Union1 = {
+  // ✅
+  name: "",
+  color: "",
+  language: "",
+  cute: false,
 };
 
 let union4: Union1 = {
