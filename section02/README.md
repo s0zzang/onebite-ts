@@ -455,12 +455,14 @@ unknownVar = "";
 unknownVar = 1;
 unknownVar = () => {};
 
-num = unknownVar; // 오류 !
-unknownVar * 2 // 오류 !
+unknownVar = num; // 가능
+num = unknownVar; // 1️⃣ 오류 !
+unknownVar * 2 // 2️⃣ 오류 !
 ```
 
-- 메서드, 연산 사용 불가
-- 모든 타입의 변수에 unknown 타입 할당 불가
+- 변수의 타입으로 정의되면, 모든 값 할당 가능
+- 1️⃣ 모든 타입의 변수에 unknown 타입 할당 불가
+- 2️⃣ 메서드, 연산 사용 불가
 
 #### 사용 방법
 

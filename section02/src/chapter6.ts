@@ -33,3 +33,18 @@ const user = {
   role: Role.ADMIN, // 0
   language: Language.korean, // "ko"
 };
+
+// unknown 타입
+
+let unknownVar: unknown;
+
+unknownVar = "";
+unknownVar = 1;
+unknownVar = () => {};
+
+let num: number = 10;
+// unknownVar = num; // unknownVar : 10
+// num = unknownVar
+// unknownVar * 3
+
+console.log(num, unknownVar);
