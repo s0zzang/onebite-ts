@@ -145,8 +145,91 @@ const person: Person = {
 
 # 맵드 타입
 
-```ts
+- 객체 타입 기반으로 새로운 객체 타입 만드는 타입 조작 기능
+- 실무에서 많이 사용함(인터페이스를 활용할 때 많이 쓰면 될듯?)
+- 인터페이스에서는 사용 불가
 
+```ts
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+type PartialUser = {
+  id?: number;
+  name?: string;
+  age?: number;
+};
+
+// 서버에 있는 user 정보 불러오기
+function fetchUser(): User {
+  return {
+    id: 1,
+    name: "이소정",
+    age: 27,
+  };
+}
+
+// 한 명의 유저 정보 수정하는 기능
+function updateUser(user: PartialUser) {
+  // ... 유저 정보 수정 기능
+}
+
+// 매개변수 user의 타입이 User이기 때문에 원하는 프로퍼티만 보낼 수가 없음
+updateUser({
+  id: 1,
+  name: "이소정",
+  age: 20,
+});
+```
+
+- User, PartialUser가 완전 중복 : 맵드 타입이 필요한 상황 !
+
+```ts
+type PartialUser = {
+  [key in "id" | "name" | "age"]?: User[key];
+  [key in keyof User]?: User[key];
+};
+```
+
+- 인터페이스로 맵드 타입 생성 불가
+- `key` : in 연산자, string literal union 타입
+  - 키가 id, name, age일 수 있음
+  - 인덱스 시그니처는 in이 아닌 콜론 사용
+- `value` : 인덱스드 엑세스 타입
+  - id: User['id'] = number
+  - name: User['name'] = string
+  - age: User['age'] = number
+- 맵드 타입을 통해 모든 프로퍼티가 선택적 프로퍼티가 되게 함
+
+#### 예시 1 : 타입이 동일한 경우
+
+```ts
+type BooleanUser = {
+  [key in "id" | "name" | "age"]: boolean;
+  [key in keyof User]: boolean;
+};
+```
+
+#### 예시 2 : readonly
+
+```ts
+type ReadonlyUser = {
+  readonly [key in keyof User]: User[key];
+};
 ```
 
 # 템플릿 리터럴 타입
+
+- 타입 조작 기능들 중 가장 단순한 기능
+- 템플릿 리터럴을 이용해 특정 패턴을 갖는 String 타입을 만드는 기능
+- 문자열로 여러가지 상황을 표현해야하는 경우 사용됨
+
+```ts
+type Color = "red" | "black" | "green";
+type Animal = "dog" | "cat" | "chicken";
+
+type ColoredAnimal = `red-dog` | 'red-cat' | 'red-chicken' | 'black-dog' ... ;
+
+type ColoredAnimal = `${Color}-${Animal}`;
+```
