@@ -4,15 +4,17 @@ interface Props extends Todo {
   onClickDelete: (id: number) => void;
 }
 
-export default function TodoItem(props: Props) {
+const TodoItem = ({ onClickDelete, id, content }: Props) => {
   const onClickButton = () => {
-    props.onClickDelete(props.id);
+    onClickDelete(id);
   };
 
   return (
     <div>
-      {props.id}번은 {props.content}
+      {id}번은 {content}
       <button onClick={onClickButton}>삭제</button>
     </div>
   );
-}
+};
+
+export default TodoItem;

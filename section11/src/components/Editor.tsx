@@ -5,13 +5,14 @@ interface Props {
   children: ReactElement;
 }
 
-export default function Editor(props: Props) {
+function Editor({ onClickAdd }: Props) {
+  // const Editor: React.FC<Props> = ({ onClickAdd }) => {
   const [text, setText] = useState("");
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setText(e.target.value);
 
   const onClickButton = () => {
-    props.onClickAdd(text);
+    onClickAdd(text);
     setText("");
   };
 
@@ -22,3 +23,5 @@ export default function Editor(props: Props) {
     </>
   );
 }
+
+export default Editor;
